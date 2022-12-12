@@ -36,21 +36,32 @@ public class MyArrayList<E> implements MyList<E> {
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
+        for (Object element : c) {
+            if (!contains(element)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        return false;
+        int prevSize = size();
+        for (E element : c) {
+            add(size(), element);
+        }
+        return size() == c.size() + prevSize;
     }
 
     @Override
     public boolean removeAll(Collection<?> c) {
+        // home work
         return false;
     }
 
     @Override
     public boolean retainAll(Collection<?> c) {
+        // home work
         return false;
     }
 
@@ -141,21 +152,17 @@ public class MyArrayList<E> implements MyList<E> {
         if (data.length == size) {
             return;
         }
-
-        size = Math.max(size, DEFAULT_CAPACITY);
-
         data = Arrays.copyOf(data, size);
-
     }
 
     @Override
     public Iterator<E> iterator() {
-        return null;
+        return new IteratorImpl();
     }
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        return Arrays.copyOf(data, size());
     }
 
     @Override
@@ -181,4 +188,37 @@ public class MyArrayList<E> implements MyList<E> {
         }
     }
 
+    @Override
+    public String toString() {
+        StringBuilder content = new StringBuilder("[");
+
+        for (int i = 0; i < size(); i++) {
+            if (i + 1 < size()) {
+                content.append(data[i]).append(", ");
+            } else {
+                content.append(data[i]).append("]");
+            }
+        }
+        return content.toString();
+    }
+
+    private class IteratorImpl implements Iterator<E> {
+
+        private int currentIndex; // {4, 8, 9, null, null, null} length = 6, size = 3, currentIndex = 3
+
+        @Override
+        public boolean hasNext() {
+            return currentIndex < size;
+        }
+
+        @Override
+        public E next() {
+            return data[currentIndex++];
+        }
+
+        @Override
+        public void remove() {
+            MyArrayList.this.remove(currentIndex - 1);
+        }
+    }
 }

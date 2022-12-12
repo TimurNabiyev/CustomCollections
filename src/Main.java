@@ -1,49 +1,25 @@
 import collection.MyArrayList;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class Main {
     public static void main(String[] args) {
         MyArrayList<String> myArrayList = new MyArrayList<>();
+        MyArrayList<String> myArrayListCopy = new MyArrayList<>();
+
         myArrayList.add("Tashkent");
-        myArrayList.add("Bishkek");
-        myArrayList.add("Bishkek");
-        myArrayList.add("Bishkek");
-        myArrayList.add("Bishkek");
-        myArrayList.add("Bishkek");
-        myArrayList.add("Bishkek");
-        myArrayList.add("Bishkek");
-        myArrayList.add("Bishkek");
-        myArrayList.add("Bishkek");
-        myArrayList.add("Bishkek");
-        myArrayList.add("Bishkek");
-        myArrayList.add("Bishkek");
-        myArrayList.add("Bishkek");
-        myArrayList.add("Bishkek");
+        myArrayList.add("Bukhara");
+        myArrayList.add("Khiva");
+        myArrayList.add("Fergana");
         myArrayList.add("Samarkand");
-        myArrayList.add(myArrayList.size(), "Tashkent");
-        myArrayList.add(1, "Fergana");
 
-        myArrayList.remove(0);
-        myArrayList.remove(0);
-        myArrayList.remove(0);
-        myArrayList.remove(0);
-        myArrayList.remove(0);
-        myArrayList.remove(0);
-        myArrayList.remove(0);
-        myArrayList.remove(0);
-        myArrayList.remove(0);
-        myArrayList.remove(0);
-        myArrayList.remove(0);
-        myArrayList.remove(0);
-        myArrayList.remove(0);
-        myArrayList.remove(0);
-        myArrayList.remove(0);
-        myArrayList.remove(0);
-        myArrayList.remove(0);
-        myArrayList.remove(0);
+        myArrayListCopy.add("Khiva");
+        myArrayListCopy.add("Fergana");
+        myArrayListCopy.add("Samarkand");
 
-        myArrayList.trimToSize();
-
-        System.out.println("Size after manipulations: " + myArrayList.size());
-        System.out.println();
+        System.out.println(myArrayListCopy.containsAll(myArrayList));
+        System.out.println(myArrayList.addAll(myArrayListCopy));
+        System.out.println(myArrayList.removeAll(myArrayListCopy));
     }
 }
