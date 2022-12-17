@@ -28,11 +28,21 @@ public class MyLinkedList<E> extends AbstractList<E> {
 
     @Override
     public int indexOf(E element) {
-        return 0;
+        Node<E> currentNode = head;
+
+        for (int i = 0; i < size(); i++) {
+            if (currentNode.element.equals(element)) {
+                return i;
+            }
+            currentNode = currentNode.next;
+        }
+
+        return -1;
     }
 
     @Override
     public int lastIndexOf(E element) {
+        // Home work
         return 0;
     }
 
@@ -78,6 +88,9 @@ public class MyLinkedList<E> extends AbstractList<E> {
 
     @Override
     public boolean contains(Object o) {
+        if (indexOf((E) o) != -1) {
+            return true;
+        }
         return false;
     }
 
@@ -98,7 +111,9 @@ public class MyLinkedList<E> extends AbstractList<E> {
 
     @Override
     public void clear() {
-
+        head = null;
+        tail = null;
+        size = 0;
     }
 
     @Override

@@ -8,10 +8,12 @@ public class Main {
         MyArrayList<Integer> myArrayList = new MyArrayList<>(30000);
         MyLinkedList<Integer> myLinkedList = new MyLinkedList<>();
 
+        byte[] ar = new byte[3]; // @10
+
         // ArrayList add
         long startTime = System.nanoTime();
         for (int i = 0; i < 30_000; i++) {
-            myArrayList.add(myArrayList.size() / 2, i);
+            myArrayList.add(i);
         }
         long endTime = System.nanoTime();
 
@@ -20,7 +22,7 @@ public class Main {
         // LinkedList add
         startTime = System.nanoTime();
         for (int i = 0; i < 30_000; i++) {
-            myLinkedList.add(myLinkedList.size() / 2, i);
+            myLinkedList.add(i);
         }
         endTime = System.nanoTime();
         System.out.println("LinkedList add: " + (endTime - startTime));
@@ -41,6 +43,8 @@ public class Main {
         }
         endTime = System.nanoTime();
         System.out.println("LinkedList get: " + (endTime - startTime));
+
+        System.out.println("Index of 5: " + myLinkedList.indexOf(29999));
 
     }
 }
