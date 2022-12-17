@@ -1,31 +1,46 @@
 import collection.MyArrayList;
+import collection.MyLinkedList;
 
 import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        MyArrayList<Integer> myArrayList = new MyArrayList<>();
-        ArrayList<Integer> arrayList = new ArrayList<>();
+        MyArrayList<Integer> myArrayList = new MyArrayList<>(30000);
+        MyLinkedList<Integer> myLinkedList = new MyLinkedList<>();
 
-        for (int i = 0; i < 30_000_000; i++) {
-            myArrayList.add(i);
+        // ArrayList add
+        long startTime = System.nanoTime();
+        for (int i = 0; i < 30_000; i++) {
+            myArrayList.add(myArrayList.size() / 2, i);
+        }
+        long endTime = System.nanoTime();
+
+        System.out.println("ArrayList add: " + (endTime - startTime));
+
+        // LinkedList add
+        startTime = System.nanoTime();
+        for (int i = 0; i < 30_000; i++) {
+            myLinkedList.add(myLinkedList.size() / 2, i);
+        }
+        endTime = System.nanoTime();
+        System.out.println("LinkedList add: " + (endTime - startTime));
+
+        // Arraylist get
+        startTime = System.nanoTime();
+        for (int i = 0; i < myArrayList.size(); i++) {
+            myArrayList.get(i);
         }
 
+        endTime = System.nanoTime();
+        System.out.println("ArrayList get: " + (endTime - startTime));
 
-        long startTime = System.currentTimeMillis();
-        for (int i = 0; i < 3_000; i++) {
-            myArrayList.remove(0);
+        // LinkedList get
+        startTime = System.nanoTime();
+        for (int i = 0; i < myLinkedList.size(); i++) {
+            myLinkedList.get(i);
         }
-        long endTime = System.currentTimeMillis();
+        endTime = System.nanoTime();
+        System.out.println("LinkedList get: " + (endTime - startTime));
 
-        System.out.println("MyArrayList time consumption: " + (endTime - startTime));
-
-        startTime = System.currentTimeMillis();
-        for (int i = 0; i < 3_000; i++) {
-            arrayList.remove(0);
-        }
-        endTime = System.currentTimeMillis();
-
-        System.out.println("ArrayList time consumption: " + (endTime - startTime));
     }
 }

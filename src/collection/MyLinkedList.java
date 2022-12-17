@@ -15,7 +15,15 @@ public class MyLinkedList<E> extends AbstractList<E> {
 
     @Override
     public E get(int index) {
-        return null;
+        if (index < 0 || index >= size) {
+            return null;
+        }
+
+        Node<E> currentNode = head; //
+        for (int i = 1; i <= index; i++) { // i = 1
+            currentNode = currentNode.next; //
+        }
+        return currentNode.element;
     }
 
     @Override
@@ -54,7 +62,7 @@ public class MyLinkedList<E> extends AbstractList<E> {
         } else {
             Node<E> currentNode = head;
 
-            for (int i = 0; i < index; i++) {
+            for (int i = 1; i < index; i++) {
                 currentNode = currentNode.next;
             }
             newNode.next = currentNode.next;
@@ -65,7 +73,7 @@ public class MyLinkedList<E> extends AbstractList<E> {
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     @Override
@@ -91,6 +99,24 @@ public class MyLinkedList<E> extends AbstractList<E> {
     @Override
     public void clear() {
 
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("head -> ");
+
+        Node<E> currentNode = head;
+
+        for (int i = 0; i < size(); i++) {
+            result.append(currentNode.element);
+            currentNode = currentNode.next;
+            if (currentNode != null) {
+                result.append(" -> ");
+            } else {
+                result.append(" <- tail");
+            }
+        }
+        return result.toString();
     }
 
     private static class Node<E> {
