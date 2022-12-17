@@ -8,5 +8,6 @@ public interface MyList<E> extends Collection<E> {
     int indexOf(E element);
     int lastIndexOf(E element);
     E remove(int index);
+    void add(int index, E element);
 
 }

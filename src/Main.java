@@ -1,25 +1,31 @@
 import collection.MyArrayList;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Main {
     public static void main(String[] args) {
-        MyArrayList<String> myArrayList = new MyArrayList<>();
-        MyArrayList<String> myArrayListCopy = new MyArrayList<>();
+        MyArrayList<Integer> myArrayList = new MyArrayList<>();
+        ArrayList<Integer> arrayList = new ArrayList<>();
 
-        myArrayList.add("Tashkent");
-        myArrayList.add("Bukhara");
-        myArrayList.add("Khiva");
-        myArrayList.add("Fergana");
-        myArrayList.add("Samarkand");
+        for (int i = 0; i < 30_000_000; i++) {
+            myArrayList.add(i);
+        }
 
-        myArrayListCopy.add("Khiva");
-        myArrayListCopy.add("Fergana");
-        myArrayListCopy.add("Samarkand");
 
-        System.out.println(myArrayListCopy.containsAll(myArrayList));
-        System.out.println(myArrayList.addAll(myArrayListCopy));
-        System.out.println(myArrayList.removeAll(myArrayListCopy));
+        long startTime = System.currentTimeMillis();
+        for (int i = 0; i < 3_000; i++) {
+            myArrayList.remove(0);
+        }
+        long endTime = System.currentTimeMillis();
+
+        System.out.println("MyArrayList time consumption: " + (endTime - startTime));
+
+        startTime = System.currentTimeMillis();
+        for (int i = 0; i < 3_000; i++) {
+            arrayList.remove(0);
+        }
+        endTime = System.currentTimeMillis();
+
+        System.out.println("ArrayList time consumption: " + (endTime - startTime));
     }
 }

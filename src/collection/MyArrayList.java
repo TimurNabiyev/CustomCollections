@@ -1,68 +1,26 @@
 package collection;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Iterator;
 
-public class MyArrayList<E> implements MyList<E> {
+public class MyArrayList<E> extends AbstractList<E> {
 
     private static final int DEFAULT_CAPACITY = 10;
 
     private E[] data;
     private int size; // 1
 
+    public MyArrayList(int initialCapacity) {
+        if (initialCapacity == 0) {
+            initialCapacity = DEFAULT_CAPACITY;
+        }
+
+        data = (E[]) new Object[initialCapacity];
+
+    }
+
     public MyArrayList() {
         data = (E[]) new Object[DEFAULT_CAPACITY];
-    }
-
-    @Override
-    public boolean add(E element) {
-        ensureCapacity();
-        int prevSize = size;
-        data[size++] = element;
-        return prevSize != size;
-    }
-
-    @Override
-    public boolean remove(Object o) {
-        int index = indexOf((E) o);
-
-        E removed = null;
-        if (index != -1) {
-            removed = remove(index);
-        }
-        return removed != null;
-    }
-
-    @Override
-    public boolean containsAll(Collection<?> c) {
-        for (Object element : c) {
-            if (!contains(element)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends E> c) {
-        int prevSize = size();
-        for (E element : c) {
-            add(size(), element);
-        }
-        return size() == c.size() + prevSize;
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> c) {
-        // home work
-        return false;
-    }
-
-    @Override
-    public boolean retainAll(Collection<?> c) {
-        // home work
-        return false;
     }
 
     @Override
@@ -129,11 +87,6 @@ public class MyArrayList<E> implements MyList<E> {
     @Override
     public int size() {
         return size;
-    }
-
-    @Override
-    public boolean isEmpty() {
-        return size == 0;
     }
 
     @Override
