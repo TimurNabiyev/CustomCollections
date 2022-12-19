@@ -42,8 +42,17 @@ public class MyLinkedList<E> extends AbstractList<E> {
 
     @Override
     public int lastIndexOf(E element) {
-        // Home work
-        return 0;
+        int lastIndex = -1;
+
+        Node<E> currentNode = head;
+
+        for (int i = 0; i < size; i++) {
+           if (currentNode.element.equals(element)) {
+               lastIndex = i;
+           }
+           currentNode = currentNode.next;
+        }
+        return lastIndex;
     }
 
     @Override
