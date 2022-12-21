@@ -64,9 +64,9 @@ public class MyLinkedList<E> extends AbstractList<E> implements Deque<E> {
         }
 
         if (index == 0) {
-            pollFirst();
+            return pollFirst();
         } else if (index == size() - 1) {
-            pollLast();
+            return pollLast();
         }
         else {
             Node<E> previous = head;
@@ -200,12 +200,20 @@ public class MyLinkedList<E> extends AbstractList<E> implements Deque<E> {
 
     @Override
     public E removeFirst() {
-        return null; // hw
+        E element = remove(0);
+        if (element.equals(null)) {
+            throw new NullPointerException();
+        }
+        return element; // hw
     }
 
     @Override
     public E removeLast() {
-        return null; // hw
+        E element = remove(size() - 1);
+        if (element.equals(null)) {
+            throw new NullPointerException();
+        }
+        return element; // hw
     }
 
     @Override
@@ -226,8 +234,20 @@ public class MyLinkedList<E> extends AbstractList<E> implements Deque<E> {
 
     @Override
     public E pollLast() {
-        // hw
-        return null;
+        Node<E> tempNode = null;
+        Node<E> remove = null;
+        if (size == 0) {
+            return tempNode.element;
+        } else {
+            tempNode = head;
+            for (int i = 0; i < size - 1; i++) {
+                tempNode = tempNode.next;
+            }
+            remove = tempNode.next;
+            remove.next = null;
+            tail = tempNode;
+        }
+        return remove.element;
     }
 
     @Override

@@ -13,6 +13,10 @@ public class Main {
         linkedList.addFirst("A");
         linkedList.offerFirst("B");
         linkedList.offer("C");
+        Deque<String> deque = new LinkedList();
+        deque.add("First");
+        deque.add("Second");
+        deque.removeFirst();
 
         System.out.println(linkedList.poll());
         System.out.println(linkedList.poll());
